@@ -14,15 +14,33 @@ const carouselImages = [
   { id: "4", src: "/memories/4.jpg", title: "Memoria 4" },
   { id: "5", src: "/memories/5.jpg", title: "Memoria 5" },
   { id: "6", src: "/memories/6.jpg", title: "Memoria 6" },
+  { id: "7", src: "/memories/7.jpg", title: "Memoria 7" },
+  { id: "8", src: "/memories/8.jpg", title: "Memoria 8" },
+  { id: "9", src: "/memories/9.jpg", title: "Memoria 9" },
+  { id: "10", src: "/memories/10.jpg", title: "Memoria 10" },
+  { id: "11", src: "/memories/11.jpg", title: "Memoria 11" },
+  { id: "12", src: "/memories/12.jpg", title: "Memoria 12" },
+  { id: "13", src: "/memories/13.jpg", title: "Memoria 13" },
+  { id: "14", src: "/memories/14.jpg", title: "Memoria 14" },
+  { id: "15", src: "/memories/15.jpg", title: "Memoria 15" },
 ];
 
 // 🖼️ Galería de imágenes (redirigen a páginas con videos)
 const galleryImages = [
-  { id: "1", src: "/gallery/1.jpg", title: "Video Musical 1" },
-  { id: "2", src: "/gallery/2.jpg", title: "Video Musical 2" },
-  { id: "3", src: "/gallery/3.webp", title: "Video Musical 3" },
-  { id: "4", src: "/gallery/4.jpg", title: "Video Musical 4" },
-  { id: "5", src: "/gallery/5.jpg", title: "Video Musical 5" },
+  { id: "1", src: "/gallery/1.jpg", title: "Song 1" },
+  { id: "2", src: "/gallery/2.jpg", title: "Song 2" },
+  { id: "3", src: "/gallery/3.webp", title: "Song 3" },
+  { id: "4", src: "/gallery/4.jpg", title: "Song 4" },
+  { id: "5", src: "/gallery/5.jpg", title: "Song 5" },
+  { id: "6", src: "/gallery/6.jpg", title: "Song 6" },
+  { id: "7", src: "/gallery/7.jpg", title: "Song 7" },
+  { id: "8", src: "/gallery/8.jpg", title: "Song 8" },
+  { id: "9", src: "/gallery/9.jpg", title: "Song 9" },
+  { id: "10", src: "/gallery/10.jpg", title: "Song 10" },
+  { id: "11", src: "/gallery/11.jpg", title: "Song 11" },
+  { id: "12", src: "/gallery/12.jpg", title: "Song 12" },
+  { id: "13", src: "/gallery/13.jpg", title: "Song 13" },
+  { id: "14", src: "/gallery/14.jpg", title: "Song 14" },
 ];
 
 export default function Home() {
@@ -50,22 +68,24 @@ export default function Home() {
       {/* 🌠 Carrusel */}
       <section className="relative w-[90%] max-w-4xl">
         <div ref={sliderRef} className="keen-slider rounded-2xl overflow-hidden">
-          {carouselImages.map((img) => (
-            <div
-              key={img.id}
-              className="keen-slider__slide flex justify-center cursor-pointer"
-              onClick={() => router.push(`/memories/${img.id}`)}
-            >
-              <Image
-                src={img.src}
-                alt={img.title}
-                width={800}
-                height={500}
-                className="rounded-2xl shadow-lg object-cover"
-              />
-            </div>
-          ))}
-        </div>
+  {carouselImages.map((img) => (
+    <div
+      key={img.id}
+      className="keen-slider__slide flex justify-center cursor-pointer"
+      onClick={() => router.push(`/memories/${img.id}`)}
+    >
+      <Image
+        src={img.src}
+        alt={img.title}
+        width={800}
+        height={500}
+        className="rounded-2xl shadow-lg object-cover transition-transform duration-300 hover:scale-110"
+      />
+    </div>
+  ))}
+</div>
+
+
 
         {/* Botones de navegación */}
         <button
