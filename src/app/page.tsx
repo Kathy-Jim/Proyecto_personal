@@ -41,6 +41,12 @@ const galleryImages = [
   { id: "12", src: "/gallery/12.jpg", title: "Song 12" },
   { id: "13", src: "/gallery/13.jpg", title: "Song 13" },
   { id: "14", src: "/gallery/14.jpg", title: "Song 14" },
+  { id: "15", src: "/gallery/15.jpg", title: "Song 15" },
+  { id: "16", src: "/gallery/16.jpg", title: "Song 16" },
+  { id: "17", src: "/gallery/17.jpeg", title: "Song 17" },
+  { id: "18", src: "/gallery/18.jpeg", title: "Song 18" },
+  { id: "19", src: "/gallery/19.jpeg", title: "Song 19" },
+  { id: "20", src: "/gallery/20.jpeg", title: "Song 20" },
 ];
 
 export default function Home() {
