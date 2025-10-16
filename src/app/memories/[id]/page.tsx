@@ -1,10 +1,6 @@
 import Image from "next/image";
 
-interface MemoryPageProps {
-  params: { id: string };
-}
-
-export default function MemoryPage({ params }: MemoryPageProps) {
+export default function MemoryPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
   const memories = {
