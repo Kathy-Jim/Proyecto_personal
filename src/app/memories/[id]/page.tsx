@@ -3,6 +3,9 @@ import Image from "next/image";
 export default function MemoryPage({ params }: { params: { id: string } }) {
   const { id } = params;
 
+
+
+
   const memories = {
     "1": {
       title: "Bajo un árbol en un día de cumpleaños🦔💙",
@@ -125,3 +128,25 @@ export default function MemoryPage({ params }: { params: { id: string } }) {
     </main>
   );
 }
+
+export function generateStaticParams() {
+  return [
+    { id: "1" },
+    { id: "2" },
+    { id: "3" },
+    { id: "4" },
+    { id: "5" },
+    { id: "6" },
+    { id: "7" },
+    { id: "8" },
+    { id: "9" },
+    { id: "10" },
+    { id: "11" },
+    { id: "12" },
+    { id: "13" },
+    { id: "14" },
+    { id: "15" },
+  ];
+}
+
+export const dynamic = "force-static";
