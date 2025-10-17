@@ -1,12 +1,16 @@
+import { Metadata } from "next";
 import Image from "next/image";
+import type {FC} from 'react';
 
-export default function MemoryPage({ params }: { params: { id: string } }) {
-  const { id } = params;
-
-
-
-
-  const memories = {
+const memories: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    video?: string[];
+    images?: string[];
+  }
+> = {
     "1": {
       title: "Bajo un árbol en un día de cumpleaños🦔💙",
       description:
@@ -85,15 +89,36 @@ export default function MemoryPage({ params }: { params: { id: string } }) {
     },
   };
 
-  const memory = memories[id];
+export async function generateStaticParams() {
+  return Object.keys(memories).map((id) => ({ id }));
+}
 
-  if (!memory)
+export async function generateMetadata({
+  params,
+}: {
+  params: { id: string };
+}): Promise<Metadata> {
+  const memory = memories[params.id];
+  return {
+    title: memory?.title || "Memoria no encontrada",
+  };
+}
+
+interface MemoryPageProps {
+  params: { id: string };
+}
+
+const MemoryPage: FC<MemoryPageProps> = ({ params }) => {
+  const memory = memories[params.id];
+
+  if (!memory) {
     return <p className="text-center mt-10">Memoria no encontrada.</p>;
+  }
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-8">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-10 max-w-5xl w-full">
-        {/* 📸 Imagen o 🎥 Video a la izquierda */}
+        {/* Multimedia */}
         <div className="flex-shrink-0 w-full sm:w-1/2 flex justify-center">
           {memory.video ? (
             <video
@@ -105,17 +130,19 @@ export default function MemoryPage({ params }: { params: { id: string } }) {
               className="rounded-xl shadow-lg object-cover w-[600px] h-[550px]"
             />
           ) : (
-            <Image
-              src={memory.images[0]}
-              alt={memory.title}
-              width={600}
-              height={400}
-              className="rounded-xl shadow-lg object-cover"
-            />
+            memory.images && (
+              <Image
+                src={memory.images[0]}
+                alt={memory.title}
+                width={600}
+                height={400}
+                className="rounded-xl shadow-lg object-cover"
+              />
+            )
           )}
         </div>
 
-        {/* 📝 Texto a la derecha */}
+        {/* Texto */}
         <div className="flex flex-col justify-center items-center sm:w-1/2 text-center">
           <h1 className="text-4xl font-bold mb-4 text-gray-800">
             {memory.title}
@@ -127,26 +154,9 @@ export default function MemoryPage({ params }: { params: { id: string } }) {
       </div>
     </main>
   );
-}
+};
 
-export function generateStaticParams() {
-  return [
-    { id: "1" },
-    { id: "2" },
-    { id: "3" },
-    { id: "4" },
-    { id: "5" },
-    { id: "6" },
-    { id: "7" },
-    { id: "8" },
-    { id: "9" },
-    { id: "10" },
-    { id: "11" },
-    { id: "12" },
-    { id: "13" },
-    { id: "14" },
-    { id: "15" },
-  ];
-}
-
+// ⛔️ Forzar generación estática (opcional si ya usas generateStaticParams)
 export const dynamic = "force-static";
+
+export default MemoryPage;
