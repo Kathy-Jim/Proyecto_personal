@@ -1,28 +1,21 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import type {FC} from 'react';
+import { JSX } from "react";
 
-const memories: Record<
-  string,
-  {
-    title: string;
-    description: string;
-    video?: string[];
-    images?: string[];
-  }
-> = {
-    "1": {
-      title: "Bajo un árbol en un día de cumpleaños🦔💙",
-      description:
-        "Un pequeño erizo cumpliría 15 años un viernes de agosto, el primer día de este interesante mes, y esta foto demuestra el inicio de muchas aventuras más :3.",
-      video: ["/memories/extra01.mp4"],
-    },
-    "2": {
-      title: "Una fotito meses después💜, demostrando que sí, nos expresamos a tiempo🦔",
-      description: "La sonrisa que nunca dejaré de amar, provocar, escuchar y cuidar; un momento espóntaneo con nuestra camara, captando nuestra naturaleza tierna y linda de ambos, el querer captar este momento fue hermoso para mi haciendo que se expresará aquí y ahora <3",
-      images: ["/memories/2.jpg"],
-    },
-    "3": {
+// Base de datos simulada
+const memories = {
+  "1": {
+    title: "Bajo un árbol en un día de cumpleaños🦔💙",
+    description:
+      "Un pequeño erizo cumpliría 15 años un viernes de agosto…",
+    video: ["/memories/extra01.mp4"],
+  },
+  "2": {
+    title: "Una fotito meses después💜, demostrando que sí, nos expresamos a tiempo🦔",
+    description: "La sonrisa que nunca dejaré de amar…",
+    images: ["/memories/2.jpg"],
+  },
+  "3": {
       title: "Un giralsolcito para ti 🌻",
       description: "Nuestra celebración en diciembre, un día en donde nos vimos muyyyy tempranoooooo y nuestros minis yos estuvieron presentes en nuestra linda salida :3, y culmino la salidita con una florcita que a ti te gusta mucho <3, y casualmente mientras eramos amigos lo supe, recuerdo que quedaste sin palabras y escogiste la flor dandome luego un abrazo fuerte 🌻💫🦔",
       images: ["/memories/extra3.jpg"],
@@ -87,29 +80,26 @@ const memories: Record<
       description: "Un día del niño en donde se celebro al mejor kiddo del mundo, y obvio es mi niño, and you are a little and cute kiddo Sonic💙🌻; y efectivamente, compartimos la comidita y fueron lo momentos más lindos del mundoooo :3",
       images: ["/memories/15.jpg"],
     },
-  };
+};
 
+// Generar parámetros estáticos
 export async function generateStaticParams() {
   return Object.keys(memories).map((id) => ({ id }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: { id: string };
-}): Promise<Metadata> {
-  const memory = memories[params.id];
+// Metadata: [Se eliminan las anotaciones de tipo]
+export async function generateMetadata({ params }) {
+  const { id } = params;
+  const memory = memories[id];
   return {
     title: memory?.title || "Memoria no encontrada",
   };
 }
 
-interface MemoryPageProps {
-  params: { id: string };
-}
-
-const MemoryPage: FC<MemoryPageProps> = ({ params }) => {
-  const memory = memories[params.id];
+// Componente de página: [Se eliminan las anotaciones de tipo]
+const MemoryPage = async ({ params }) => {
+  const { id } = params;
+  const memory = memories[id];
 
   if (!memory) {
     return <p className="text-center mt-10">Memoria no encontrada.</p>;
@@ -118,7 +108,6 @@ const MemoryPage: FC<MemoryPageProps> = ({ params }) => {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-8">
       <div className="flex flex-col sm:flex-row items-center justify-center gap-10 max-w-5xl w-full">
-        {/* Multimedia */}
         <div className="flex-shrink-0 w-full sm:w-1/2 flex justify-center">
           {memory.video ? (
             <video
@@ -142,7 +131,6 @@ const MemoryPage: FC<MemoryPageProps> = ({ params }) => {
           )}
         </div>
 
-        {/* Texto */}
         <div className="flex flex-col justify-center items-center sm:w-1/2 text-center">
           <h1 className="text-4xl font-bold mb-4 text-gray-800">
             {memory.title}
@@ -156,7 +144,5 @@ const MemoryPage: FC<MemoryPageProps> = ({ params }) => {
   );
 };
 
-// ⛔️ Forzar generación estática (opcional si ya usas generateStaticParams)
 export const dynamic = "force-static";
-
 export default MemoryPage;

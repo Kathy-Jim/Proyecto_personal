@@ -2,6 +2,7 @@
 
 import { notFound, useRouter } from "next/navigation";
 
+// Base de datos de videos
 const videos = [
   { id: "1", src: "/videos/1.mp4", title: "21 Guns" },
   { id: "2", src: "/videos/12.mp4", title: "Amygi" },
@@ -25,9 +26,10 @@ const videos = [
   { id: "20", src: "/videos/20.mp4", title: "Cierra tu corazón y no dejes entrar a nadie más <3" },
 ];
 
-export default function VideoPage({ params }: { params: { id: string } }) {
+// Eliminamos TODO el tipado para que el archivo sea JavaScript puro.
+export default function VideoPage({ params }) {
   const router = useRouter();
-  const video = videos.find((v) => v.id === params.id); // ✅ usar params directamente
+  const video = videos.find((v) => v.id === params.id); 
 
   if (!video) return notFound();
 
