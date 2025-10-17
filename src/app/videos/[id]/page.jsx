@@ -5,7 +5,7 @@ import { notFound, useRouter } from "next/navigation";
 // Base de datos de videos
 const videos = [
   { id: "1", src: "/videos/1.mp4", title: "21 Guns" },
-  { id: "2", src: "/videos/12.mp4", title: "Amygi" },
+  { id: "2", src: "/videos/12.mp4", title: "Amy" },
   { id: "3", src: "/videos/3.mp4", title: "Pa Siempre" },
   { id: "4", src: "/videos/4.mp4", title: "Twin skies" },
   { id: "5", src: "/videos/5.mp4", title: "Lonely day" },
